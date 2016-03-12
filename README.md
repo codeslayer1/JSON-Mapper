@@ -9,7 +9,7 @@ A Node package for transforming(mapping) one JSON object to another based on a s
 
 ## Usage
 
-    var JSONTransform = require('json-transform');
+    var JSONTransform = require('json_transform');
     var input = {
       "id" : 101,
       "content" : "My first npm package",

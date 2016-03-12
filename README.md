@@ -1,15 +1,15 @@
-JSON-Mapper
+JSON-Transform
 =========
 
-A Node package for mapping(transforming) one JSON object into another based on a specified template
+A Node package for transforming(mapping) one JSON object to another based on a specified template
 
 ## Installation
 
-  npm install json-mapper --save
+  npm install json-transform --save
 
 ## Usage
 
-    var JSONMapper = require('json-mapper');
+    var JSONTransform = require('json-transform');
     var input = {
       "id" : 101,
       "content" : "My first npm package",
@@ -102,7 +102,7 @@ A Node package for mapping(transforming) one JSON object into another based on a
       }
     };
 
-    var result = JSONMapper.map(input, template);
+    var result = JSONTransform.transform(input, template);
     
 ##### Result  
     {

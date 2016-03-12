@@ -2,74 +2,74 @@
  * Created by codeslayer on 3/13/16.
  */
 
-var JSONMapper = {
+var JSONTransform = {
 
   /**
-   * Routes request to mapObject function after sanitation checks in input/mapping
+   * Routes request to transformObject function after sanitation checks in input/template
    *
-   * @param {JSON} input, {JSON} mapping
+   * @param {JSON} input, {JSON} template
    * @return {JSON}
    */
-  map: function(input, mapping){
-    if(Utils.isEmpty(input) || Utils.isEmpty(mapping)){
+  transform: function(input, template){
+    if(Utils.isEmpty(input) || Utils.isEmpty(template)){
       return null
     }
 
-    return JSONMapper.mapObject(input,mapping);
+    return JSONTransform.transformObject(input,template);
   },
 
   /**
-   * This function iterates the specified mapping and populates the desired keys from the input
+   * This function iterates the specified template and populates the desired keys from the input
    *
-   * @param {JSON} input, {JSON} mapping
+   * @param {JSON} input, {JSON} template
    * @return {JSON}
    */
-  mapObject: function(input, mapping){
-    var mappedObject = {};
+  transformObject: function(input, template){
+    var transformedObject = {};
 
-    for(var actualKey in mapping){
+    for(var actualKey in template){
       /*
-       -> if an object or array needs to be mapped, we take the desired key name and data to be mapped inside an object,
-        and parse all the keys in data one by one and set the mapped output against the desired key name
-       -> if a single variable needs to be mapped, we set the desired value against the desired key
+       -> if an object or array needs to be transformed, we take the desired key name and data to be transformed inside an object,
+        and parse all the keys in data one by one and set the transformed output against the desired key name
+       -> if a single variable needs to be transformed, we set the desired value against the desired key
        */
-      if(Utils.isObject(mapping[actualKey])){
-        var desiredKeyName = mapping[actualKey]['desiredKey'];
-        var desiredDataMapping = mapping[actualKey]['desiredData'];
+      if(Utils.isObject(template[actualKey])){
+        var desiredKeyName = template[actualKey]['desiredKey'];
+        var desiredDatatemplate = template[actualKey]['desiredData'];
 
-        if(Utils.isObject(desiredDataMapping)){
-          mappedObject[desiredKeyName] = JSONMapper.mapObject(input[actualKey],desiredDataMapping);
+        if(Utils.isObject(desiredDatatemplate)){
+          transformedObject[desiredKeyName] = JSONTransform.mapObject(input[actualKey],desiredDatatemplate);
         }
-        else if(Utils.isArray(desiredDataMapping)){
-          mappedObject[desiredKeyName] = JSONMapper.mapArray(input[actualKey],desiredDataMapping[0]);
+        else if(Utils.isArray(desiredDatatemplate)){
+          transformedObject[desiredKeyName] = JSONTransform.mapArray(input[actualKey],desiredDatatemplate[0]);
         }
       }
       else{
-        var desiredKeyName = mapping[actualKey];
-        mappedObject[desiredKeyName] = input[actualKey];
+        var desiredKeyName = template[actualKey];
+        transformedObject[desiredKeyName] = input[actualKey];
       }
     }
 
-    return mappedObject;
+    return transformedObject;
   },
 
   /**
-   * This function iterates an array and maps each object of the array one by one
+   * This function iterates an array and transforms each object of the array one by one
    *
-   * @param {JSON} input, {JSON} mapping
+   * @param {JSON} input, {JSON} template
    * @return {JSON Array}
    */
-  mapArray: function(input, mapping){
-    var mappedArray = [];
+  transformArray: function(input, template){
+    var transformedArray = [];
     for(var index in input){
       var inputObject = input[index];
-      var mappedObject = JSONMapper.mapObject(inputObject,mapping);
-      mappedArray.push(mappedObject);
+      var transformedObject = JSONTransform.mapObject(inputObject,template);
+      transformedArray.push(transformedObject);
     }
 
-    return mappedArray;
+    return transformedArray;
   }
 
 };
 
-module.exports = JSONMapper;
+module.exports = JSONTransform;

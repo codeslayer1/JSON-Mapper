@@ -5,7 +5,7 @@ A Node package for transforming(mapping) one JSON object to another based on a s
 
 ## Installation
 
-  npm install json-transform --save
+  npm install json_transform --save
 
 ## Usage
 

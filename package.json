@@ -1,5 +1,5 @@
 {
-  "name": "json-transform",
+  "name": "json_transform",
   "version": "0.1.0",
   "description": "A Node package for transforming(mapping) one JSON object to another based on a specified template",
   "main": "index.js",

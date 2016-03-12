@@ -38,10 +38,10 @@ var JSONTransform = {
         var desiredDatatemplate = template[actualKey]['desiredData'];
 
         if(Utils.isObject(desiredDatatemplate)){
-          transformedObject[desiredKeyName] = JSONTransform.mapObject(input[actualKey],desiredDatatemplate);
+          transformedObject[desiredKeyName] = JSONTransform.transformObject(input[actualKey],desiredDatatemplate);
         }
         else if(Utils.isArray(desiredDatatemplate)){
-          transformedObject[desiredKeyName] = JSONTransform.mapArray(input[actualKey],desiredDatatemplate[0]);
+          transformedObject[desiredKeyName] = JSONTransform.transformArray(input[actualKey],desiredDatatemplate[0]);
         }
       }
       else{
@@ -63,7 +63,7 @@ var JSONTransform = {
     var transformedArray = [];
     for(var index in input){
       var inputObject = input[index];
-      var transformedObject = JSONTransform.mapObject(inputObject,template);
+      var transformedObject = JSONTransform.transformObject(inputObject,template);
       transformedArray.push(transformedObject);
     }
 

@@ -61,7 +61,7 @@ var JSONTransform = {
    */
   transformArray: function(input, template){
     var transformedArray = [];
-    for(var index in input){
+    for(var index = 0; index <= input.length; index++){
       var inputObject = input[index];
       var transformedObject = JSONTransform.transformObject(inputObject,template);
       transformedArray.push(transformedObject);

@@ -1,0 +1,26 @@
+{
+  "name": "json-mapper",
+  "version": "0.1.0",
+  "description": "Node package for mapping(transforming) one JSON object into another based on a specified template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeslayer1/JSON-Mapper.git"
+  },
+  "keywords": [
+    "json",
+    "mapping",
+    "mapper",
+    "transform",
+    "convert"
+  ],
+  "author": "codeslayer1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeslayer1/JSON-Mapper/issues"
+  },
+  "homepage": "https://github.com/codeslayer1/JSON-Mapper#readme"
+}

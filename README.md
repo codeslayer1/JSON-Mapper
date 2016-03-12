@@ -158,3 +158,5 @@ A Node package for transforming(mapping) one JSON object to another based on a s
 ## Release History
 
 * 0.1.0 Initial release
+* 0.1.1 Fixed blank values in array
+* 0.1.2 Bug fix for array exceeding bounds

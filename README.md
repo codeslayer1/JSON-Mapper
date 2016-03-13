@@ -10,6 +10,8 @@ A Node package for transforming(mapping) one JSON object to another based on a s
 ## Usage
 
     var JSONTransform = require('json_transform');
+
+#### Input
     var input = {
       "id" : 101,
       "content" : "My first npm package",
@@ -66,7 +68,12 @@ A Node package for transforming(mapping) one JSON object to another based on a s
         ]
       }
     };
-    
+
+#### Template
+A template specifies how the input json should be transformed to the desired output json. The key value pair in template json specifies the input key to desired key name transformation(can be same if key need not be renamed). In case of nested json object/array, the desired key name is specified explicitly and the desired data specifies the template to be used for transforming inner object. The input keys not specified in the template are filtered out in the output json.
+
+**Example:** In the sample below, `id` key from input transforms to `user_id` key in output json. `content` key is not renamed since both input and output key name are same. For the nested `user` object, the desired key is `userDetails`, so in the output, the data(specified by template `desiredData`) for `user` object comes under the key `userDetails`. The `longitude` key is not specified in template, so it is omitted from the ouput json.
+
     var template = {
       "id" : "user_id",
       "content" : "content",
@@ -101,10 +108,11 @@ A Node package for transforming(mapping) one JSON object to another based on a s
         }
       }
     };
-
-    var result = JSONTransform.transform(input, template);
     
-##### Result  
+#### Output  
+    
+    var output = JSONTransform.transform(input, template);
+    ------------------------------------------------------
     {
       "user_id": 101,
       "content": "My first npm package",

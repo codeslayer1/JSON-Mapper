@@ -2,6 +2,7 @@
  * Created by codeslayer on 3/13/16.
  */
 
+var Utils = require("./Utils");
 var JSONTransform = {
 
   /**
@@ -27,6 +28,9 @@ var JSONTransform = {
   transformObject: function(input, template){
     var transformedObject = {};
 
+    if(Utils.isEmpty(input) || Utils.isEmpty(template))
+      return null;
+        
     for(var actualKey in template){
       /*
        -> if an object or array needs to be transformed, we take the desired key name and data to be transformed inside an object,

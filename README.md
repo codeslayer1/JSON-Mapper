@@ -168,3 +168,4 @@ A template specifies how the input json should be transformed to the desired out
 * 0.1.0 Initial release
 * 0.1.1 Fixed blank values in array
 * 0.1.2 Bug fix for array exceeding bounds
+* 0.1.3 Handling for undefined keys in JSON

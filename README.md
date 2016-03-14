@@ -70,14 +70,17 @@ A Node package for transforming(mapping) one JSON object to another based on a s
     };
 
 #### Template
-A template specifies how the input json should be transformed to the desired output json. The key value pair in template json specifies the input key to desired key name transformation(can be same if key need not be renamed). In case of nested json object/array, the desired key name is specified explicitly and the desired data specifies the template to be used for transforming inner object. The input keys not specified in the template are filtered out in the output json.
+A template specifies how the input json should be transformed to the desired output json. The key value pair in template json specifies the input key to desired key name transformation(can be same if key need not be renamed). In case of nested json object/array, the desired key name is specified explicitly and the desired data specifies the template to be used for transforming inner object. The input keys not specified in the template are filtered out in the output json. 
 
-**Example:** In the sample below, `id` key from input transforms to `user_id` key in output json. `content` key is not renamed since both input and output key name are same. For the nested `user` object, the desired key is `userDetails`, so in the output, the data(specified by template `desiredData`) for `user` object comes under the key `userDetails`. The `longitude` key is not specified in template, so it is omitted from the ouput json.
+**Update**: Starting version **0.1.4**, all keys to be included(and not to be renamed) in output json can be defined in an array named `includeTheseKeys` instead of mapping them one to one(see sample). Prior to **0.1.4**, all keys to be included in output needs to be mapped one to one. 
+
+**Example:** In the sample below, `id` key from input transforms to `user_id` key in output json. `content` and `latitude` key need not be renamed so they are defined in `includeTheseKeys` array.  
+
+For the nested `user` object, the desired key is `userDetails`, so in the output, the data(specified by template `desiredData`) for `user` object comes under the key `userDetails`. The `longitude` key is not specified in template, so it is omitted from the ouput json.
 
     var template = {
       "id" : "user_id",
-      "content" : "content",
-      "latitude" : "latitude",
+      "includeTheseKeys" : ["content", "latitude],
       "user" : {
         "desiredKey": "userDetails",
         "desiredData": {
@@ -169,3 +172,4 @@ A template specifies how the input json should be transformed to the desired out
 * 0.1.1 Fixed blank values in array
 * 0.1.2 Bug fix for array exceeding bounds
 * 0.1.3 Handling for undefined keys in JSON
+* 0.1.4 Added functionality to define all keys to be included in output json, in an array instead of mapping one to one

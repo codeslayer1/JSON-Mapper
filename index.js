@@ -30,7 +30,7 @@ var JSONTransform = {
 
     if(Utils.isEmpty(input) || Utils.isEmpty(template))
       return null;
-        
+
     for(var actualKey in template){
       /*
        -> if an object or array needs to be transformed, we take the desired key name and data to be transformed inside an object,
@@ -46,6 +46,13 @@ var JSONTransform = {
         }
         else if(Utils.isArray(desiredDatatemplate)){
           transformedObject[desiredKeyName] = JSONTransform.transformArray(input[actualKey],desiredDatatemplate[0]);
+        }
+      }
+      else if(actualKey == 'includeTheseKeys' && Utils.isArray(template[actualKey])){
+        console.log("Inside includeTheseKeys with array :: %j",template[actualKey]);
+        for(var index = 0; index < template[actualKey].length; index++){
+          var key = template[actualKey][index];
+          transformedObject[key] = input[key];
         }
       }
       else{

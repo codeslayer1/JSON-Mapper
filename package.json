@@ -1,6 +1,6 @@
 {
   "name": "json_transform",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A Node package for transforming(mapping) one JSON object to another based on a specified template",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,9 @@
     "mapping",
     "mapper",
     "transform",
-    "convert"
+    "convert",
+    "nesting",
+    "nested json"
   ],
   "author": "codeslayer1",
   "license": "ISC",

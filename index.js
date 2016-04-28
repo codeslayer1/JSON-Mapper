@@ -49,7 +49,6 @@ var JSONTransform = {
         }
       }
       else if(actualKey == 'includeTheseKeys' && Utils.isArray(template[actualKey])){
-        console.log("Inside includeTheseKeys with array :: %j",template[actualKey]);
         for(var index = 0; index < template[actualKey].length; index++){
           var key = template[actualKey][index];
           transformedObject[key] = input[key];
@@ -57,7 +56,44 @@ var JSONTransform = {
       }
       else{
         var desiredKeyName = template[actualKey];
-        transformedObject[desiredKeyName] = input[actualKey];
+        //check if deep nesting is required(actual key name contains .) and set desiredKey value to deep nested value fetched recursively
+        var actualKeysArray = actualKey.split('.');
+
+        if(actualKeysArray.length > 1){
+          var lastDeepNestedKeyValue = input[actualKeysArray[0]];
+
+          for(var i=1 ; i<actualKeysArray.length; i++){
+            //check if required deep nested key is an array and fetch and set array value against desiredKey
+            var indexOfArrayStart = actualKeysArray[i].indexOf('[');
+            var indexOfArrayEnd = actualKeysArray[i].indexOf(']');
+            var keyName = actualKeysArray[i];
+
+            if(indexOfArrayStart > -1) {
+              keyName = actualKeysArray[i].substring(0, indexOfArrayStart);
+              var keyIndex = actualKeysArray[i].substring(indexOfArrayStart+1, indexOfArrayEnd);
+
+              if(lastDeepNestedKeyValue == null || !lastDeepNestedKeyValue.hasOwnProperty(keyName)) {
+                lastDeepNestedKeyValue = null;
+              }
+              else{
+                lastDeepNestedKeyValue = lastDeepNestedKeyValue[keyName][keyIndex];
+              }
+            }
+            else{
+              if(lastDeepNestedKeyValue == null || !lastDeepNestedKeyValue.hasOwnProperty(keyName)) {
+                lastDeepNestedKeyValue = null;
+              }
+              else {
+                lastDeepNestedKeyValue = lastDeepNestedKeyValue[actualKeysArray[i]];
+              }
+            }
+          }
+
+          transformedObject[desiredKeyName] = lastDeepNestedKeyValue;
+        }
+        else {
+          transformedObject[desiredKeyName] = input[actualKey];
+        }
       }
     }
 
